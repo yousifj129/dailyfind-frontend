@@ -1,7 +1,12 @@
 import "./ShoppingItemsList.css"
-import { Rating } from '@smastrom/react-rating'
+import { Rating, ThinStar } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
-
+import { Link } from "react-router"
+const myStyles = {
+  itemShapes: ThinStar,
+  activeFillColor: '#ffb700',
+  inactiveFillColor: '#fbf1a9'
+}
 const ShoppingItemsList = ({ shoppingItems }) => {
     return (
         <>
@@ -13,16 +18,20 @@ const ShoppingItemsList = ({ shoppingItems }) => {
                     ) / shoppingItem.reviews.length
 
                     return (
+                        
+                        <Link to={`/shoppingitems/${shoppingItem._id}`}>
+                       
                         <div key={index} className="shoppingItem">
 
                             <img src={shoppingItem.images[0]} alt={`${shoppingItem.itemName} image`} className="itemImage" />
                             <h3>{shoppingItem.itemName}</h3>
                             <p style={{ display: "flex" }}>
-                                <Rating style={{ maxWidth: 75 }} value={rating} readOnly={true} />
+                                <Rating style={{ maxWidth: 90 }} value={rating} readOnly={true} itemStyles={myStyles} />
                                 <span style={{ justifySelf: "flex-end", alignSelf: "center" }}>{rating}/5</span>
                             </p>
-                            <p>{shoppingItem.price}$</p>
+                            <p><strong>{shoppingItem.price}$</strong> </p>
                         </div>
+                        </Link>
                     )
                 })}
             </div>

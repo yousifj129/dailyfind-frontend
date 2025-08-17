@@ -1,6 +1,7 @@
 .shoppingListContainer {
     display: flex;
     gap: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .shoppingItem {
@@ -12,7 +13,7 @@
     width: 200px;
     height: 200px;
     background-color: #f0efed;
-    box-shadow: 0px 0px 4px 2px #888888;
+    box-shadow: 0px 0px 2px 1px #888888;
     border-radius: 20px;
 
 }
