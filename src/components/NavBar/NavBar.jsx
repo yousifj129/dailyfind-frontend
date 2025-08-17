@@ -1,5 +1,6 @@
 import { Link } from "react-router"
-const NavBar = () =>{
+import LogoutButton from "../LogoutButton/LogoutButton";
+const NavBar = ({token, handleLogout}) =>{
     return(
       <nav>
         <ul>
@@ -12,6 +13,9 @@ const NavBar = () =>{
           <li>
             <Link to="/signup">signup</Link>
           </li>
+            <li>
+                {token ? <LogoutButton onLogout={handleLogout} /> : null}
+            </li>
         </ul>
       </nav>
     )
