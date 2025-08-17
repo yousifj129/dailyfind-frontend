@@ -1,17 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { getAllShoppingItems } from '../lib/api'
 import ShoppingItemsList from './components/ShoppingItemsList/ShoppingItemsList'
-import ShoppingItemNewForm from './components/ShoppingItemNewForm/ShoppingItemNewForm'
 
 function App() {
-  const [shoppingItems, setShoppingItems] = useState(getAllShoppingItems())
+  const [shoppingItems, setShoppingItems] = useState([])
+  const update = async () => {
+    const items = await getAllShoppingItems()
+    setShoppingItems(items)
+  }
+  useEffect(() => {
+    update()
+  }, [])
   return (
     <>
-      <ShoppingItemNewForm/>
+      <ShoppingItemsList shoppingItems={shoppingItems} />
     </>
   )
 }
 
 export default App
- 

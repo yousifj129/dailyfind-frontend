@@ -5,7 +5,7 @@ import { createShoppingItem } from "../../../lib/api"
 
 
 
-const ShoppingItemNewForm = ({ shoppingItems }) => {
+const ShoppingItemNewForm = () => {
     const [formData, setFormData] = useState({
         itemName:"",
         itemDescription:"",
