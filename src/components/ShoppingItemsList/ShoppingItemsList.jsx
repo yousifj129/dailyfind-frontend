@@ -1,4 +1,6 @@
 import "./ShoppingItemsList.css"
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const ShoppingItemsList = ({ shoppingItems }) => {
     return (
@@ -14,10 +16,14 @@ const ShoppingItemsList = ({ shoppingItems }) => {
                         <div key={index} className="shoppingItem">
 
                             <img src={shoppingItem.images[0]} alt={`${shoppingItem.itemName} image`} className="itemImage" />
-                            <h2>{shoppingItem.itemName}</h2>
-                            <p>{rating}</p>
+                            <h3>{shoppingItem.itemName}</h3>
+                            <p style={{ display: "flex" }}>
+                                <Rating style={{ maxWidth: 75 }} value={rating} readOnly={true} />
+                                <span style={{ justifySelf: "flex-end", alignSelf: "center" }}>{rating}/5</span>
+                            </p>
                             <p>{shoppingItem.price}$</p>
-                        </div>)
+                        </div>
+                    )
                 })}
             </div>
         </>
