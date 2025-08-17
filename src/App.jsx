@@ -16,7 +16,12 @@ function App() {
   }, [])
   return (
     <>
-      <ShoppingItemsList shoppingItems={shoppingItems} />
+      <NavBar />
+      <Router>
+        <Routes>
+          <Route path='/' element={<ShoppingItemsList shoppingItems={shoppingItems} />} />
+        </Routes>
+      </Router>
     </>
   )
 
