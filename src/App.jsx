@@ -41,7 +41,7 @@ function App() {
         />
         <Route
           path="/new"
-          element={<ShoppingItemNewForm token={getDecodedToken} />}
+          element={<ShoppingItemNewForm token={token} />}
         />
         <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />

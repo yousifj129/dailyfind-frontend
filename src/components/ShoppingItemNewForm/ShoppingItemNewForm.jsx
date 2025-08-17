@@ -16,7 +16,6 @@ const ShoppingItemNewForm = ({ token }) => {
   });
 
   const handleChange = (event) => {
-    console.log(event.target);
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
