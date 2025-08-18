@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-import "./LoginForm.css";
+import "../Form.css";
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -25,7 +25,7 @@ function LoginForm({ onLogin }) {
 
   return (
     <>
-    <form onSubmit={handleSubmit} className="login">
+    <form onSubmit={handleSubmit} className="form">
       <h2>Login</h2>
       <input 
         placeholder="Username"
