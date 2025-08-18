@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createShoppingItem } from "../../../lib/api";
+import "../Form.css"
 const url = import.meta.env.VITE_BACK_END_SERVER_URL
 
 const ShoppingItemNewForm = ({ token }) => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     itemName: "",
     itemDescription: "",
@@ -34,6 +36,7 @@ const ShoppingItemNewForm = ({ token }) => {
     const result = await (await axios.post(`${url}/shoppingItems/uploadImage`, data)).data
     console.log(result.imageLinks)
     createShoppingItem({...formData, images:result.imageLinks});
+    navigate("/")
   };
   return (
     <>
@@ -46,6 +49,7 @@ const ShoppingItemNewForm = ({ token }) => {
             type="text"
             name="itemName"
             id="itemName"
+            required
           />
           <label htmlFor="itemDescription">itemDescription: </label>
           <textarea
@@ -76,6 +80,7 @@ const ShoppingItemNewForm = ({ token }) => {
             type="number"
             name="price"
             id="price"
+            required
           />
           <label htmlFor="itemSpecification">itemSpecification: </label>
           <textarea
@@ -95,7 +100,7 @@ const ShoppingItemNewForm = ({ token }) => {
               <option value="pickup">pick up in an agreed place</option>
           </select>
           <label htmlFor="images">images: </label>
-          <input type="file" name="images" id="images" onChange={handleFileChange} multiple />
+          <input type="file" name="images" id="images" onChange={handleFileChange} multiple required/>
           <input type="submit" value="submit" />
         </form>
       ) : (
