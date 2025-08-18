@@ -5,23 +5,23 @@ const NavBar = ({ token, handleLogout }) => {
   return (
     <nav className="navbar">
       <ul className="navlist">
-        <li className="navitem">
-          <Link to="/">Home</Link>
+        <li>
+          <a href="/">Home</a>
         </li>
         {!token ? (
           <>
             <li>
-              <Link to="/login">login</Link>
+              <a href="/login">login</a>
             </li>
             <li>
-              <Link to="/signup">signup</Link>
+              <a href="/signup">signup</a>
             </li>
           </>
         ) : null}
         {token ? (
           <>
             <li>
-              <Link to="/new">New Item</Link>
+              <a href="/new">New Item</a>
             </li>
             <li>
               <LogoutButton onLogout={handleLogout} />
@@ -29,7 +29,12 @@ const NavBar = ({ token, handleLogout }) => {
           </>
         ) : null}
       </ul>
-    </nav>
+        <div className="shoppingimg">
+            <a href="https://www.google.com/"><img src="https://static.vecteezy.com/system/resources/previews/004/999/463/non_2x/shopping-cart-icon-illustration-free-vector.jpg"  alt="shopping img" /></a>
+            <a href=""><img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"  alt="shopping img" /></a> 
+            
+        </div> 
+   </nav>
   );
 };
 

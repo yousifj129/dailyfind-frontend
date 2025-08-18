@@ -1,9 +1,10 @@
 .navbar{
-    background-color: rgb(22, 22, 22);
+    background-color: white;
     color: white;
     padding: 10px;
     display: flex;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 .navlist{
@@ -14,9 +15,19 @@
     list-style-type: none;
 }
 
-.navitem{
-    color: white;
+.navlist li a{
+    color: black;
     text-decoration: none;
     font-size: 18px;
-
 }
+
+.shoppingimg img {
+    width: 30px ;
+    float: right;
+    margin-top: 20px;
+}
+
+
+
+
+
