@@ -1,0 +1,32 @@
+body{
+    align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+background-color: rgb(180, 180, 180);
+
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 30px;
+    margin: 50px;
+}
+

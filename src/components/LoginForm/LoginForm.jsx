@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-
+import "./LoginForm.css";
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -24,7 +24,8 @@ function LoginForm({ onLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <form onSubmit={handleSubmit} class="login">
       <h2>Login</h2>
       <input 
         placeholder="Username"
@@ -39,6 +40,8 @@ function LoginForm({ onLogin }) {
       />
       <button type="submit">Login</button>
     </form>
+    </>
+    
   )
 }
 
