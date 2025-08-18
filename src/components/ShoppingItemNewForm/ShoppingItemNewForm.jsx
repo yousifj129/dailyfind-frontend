@@ -48,13 +48,11 @@ const ShoppingItemNewForm = ({ token }) => {
             id="itemName"
           />
           <label htmlFor="itemDescription">itemDescription: </label>
-          <input
+          <textarea
             onChange={handleChange}
-            value={formData.itemDescription}
-            type="text"
             name="itemDescription"
             id="itemDescription"
-          />
+          >{formData.itemDescription}</textarea>
           <label htmlFor="itemCategory">itemCategory: </label>
           <input
             onChange={handleChange}
@@ -67,7 +65,7 @@ const ShoppingItemNewForm = ({ token }) => {
           <input
             onChange={handleChange}
             value={formData.quantity}
-            type="text"
+            type="number"
             name="quantity"
             id="quantity"
           />
@@ -75,26 +73,27 @@ const ShoppingItemNewForm = ({ token }) => {
           <input
             onChange={handleChange}
             value={formData.price}
-            type="text"
+            type="number"
             name="price"
             id="price"
           />
           <label htmlFor="itemSpecification">itemSpecification: </label>
-          <input
+          <textarea
             onChange={handleChange}
-            value={formData.itemSpecification}
-            type="text"
             name="itemSpecification"
             id="itemSpecification"
-          />
+          >{formData.itemSpecification}</textarea>
           <label htmlFor="shippingType">shippingType: </label>
-          <input
-            onChange={handleChange}
+          <select onChange={handleChange}
             value={formData.shippingType}
             type="text"
             name="shippingType"
-            id="shippingType"
-          />
+            id="shippingType">
+              <option value="free-international">free international shipping</option>
+              <option value="paid-international">paid international shipping</option>
+              <option value="postmail">postmail shipping</option>
+              <option value="pickup">pick up in an agreed place</option>
+          </select>
           <label htmlFor="images">images: </label>
           <input type="file" name="images" id="images" onChange={handleFileChange} multiple />
           <input type="submit" value="submit" />
