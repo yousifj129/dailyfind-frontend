@@ -1,0 +1,22 @@
+.navbar{
+    background-color: rgb(22, 22, 22);
+    color: white;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.navlist{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    list-style-type: none;
+}
+
+.navitem{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+
+}
