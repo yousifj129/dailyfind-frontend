@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createShoppingItem } from "../../../lib/api";
+const url = import.meta.env.VITE_BACK_END_SERVER_URL
 
 const ShoppingItemNewForm = ({ token }) => {
   const [formData, setFormData] = useState({
@@ -18,9 +19,21 @@ const ShoppingItemNewForm = ({ token }) => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  const handleSubmit = (event) => {
+  // https://stackoverflow.com/questions/65176026/uploading-image-from-react-frontend-to-express-backend-and-displaying-it-back-in
+  const handleFileChange = (event) =>{
+    console.log(event.target.files)
+    setFormData({...formData, images: event.target.files})
+    
+  }
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    createShoppingItem(formData);
+    const data = new FormData();
+    for(var x = 0; x<formData.images.length; x++) {
+        data.append('file', formData.images[x])
+    }
+    const result = await (await axios.post(`${url}/shoppingItems/uploadImage`, data)).data
+    console.log(result.imageLinks)
+    createShoppingItem({...formData, images:result.imageLinks});
   };
   return (
     <>
@@ -83,7 +96,7 @@ const ShoppingItemNewForm = ({ token }) => {
             id="shippingType"
           />
           <label htmlFor="images">images: </label>
-          <input type="file" name="images" id="images" />
+          <input type="file" name="images" id="images" onChange={handleFileChange} multiple />
           <input type="submit" value="submit" />
         </form>
       ) : (
