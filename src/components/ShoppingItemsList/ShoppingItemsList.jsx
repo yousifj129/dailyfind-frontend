@@ -31,7 +31,7 @@ const ShoppingItemsList = () => {
           return (
             // <Link to={`/shoppingitems/${shoppingItem._id}`} >
 
-            <div className="shoppingItem" key={index}>
+            <Link className="shoppingItem" key={index} to={`/${shoppingItem._id}`}>
               <img
                 src={shoppingItem.images[0]}
                 alt={`${shoppingItem.itemName} image`}
@@ -52,7 +52,7 @@ const ShoppingItemsList = () => {
               <p>
                 <strong>{shoppingItem.price}$</strong>{" "}
               </p>
-            </div>
+            </Link>
             // </Link>
           );
         })}

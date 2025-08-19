@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { jwtDecode } from "jwt-decode";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignUp from "./components/SignupForm/SignupForm";
+import ViewShoppingItem from "./components/ViewShoppingItem/ViewShoppingItem";
 
 
 function App() {
@@ -22,7 +23,6 @@ function App() {
   }
   if (token) {
     const decodedToken = jwtDecode(token);
-    console.log(decodedToken);
   }
   function getDecodedToken() {
     if (token) {
@@ -45,6 +45,11 @@ function App() {
         />
         <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/:id"
+          element={<ViewShoppingItem/>}
+        />
+        
       </Routes>
     </Router>
   );

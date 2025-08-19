@@ -1,0 +1,21 @@
+.itemContainer
+{
+    display: flex;
+}
+
+.imagesContainer
+{
+
+}
+.mainImage{
+    width: 300px;
+    height: 300px;
+    background-size: contain;
+}
+.secondaryImage{
+    width: 50px;
+    height: 50px;
+}
+.reviewsContainer{
+    
+}
