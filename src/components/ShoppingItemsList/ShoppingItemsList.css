@@ -1,6 +1,9 @@
 .shoppingListContainer {
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     gap: 10px;
+    margin-left: 7.5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
