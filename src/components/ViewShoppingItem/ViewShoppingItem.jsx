@@ -33,14 +33,18 @@ const ViewShoppingItem = ({ token }) => {
         update()
     }, [])
     return <>
-        {shoppingItem ? <>
+        {shoppingItem ? <div className="container">
             <div className="itemContainer">
                 <div className="imagesContainer">
-                    <img src={shoppingItem.images[0]} alt="main image" className="mainImage" />
-                    {shoppingItem.images.map((image, index) => {
+                    <div className="secondaryImageContainer">
+                     {shoppingItem.images.map((image, index) => {
                         if (index == 0) return null;
+                        if(index > 3) return null
                         return <img key={index} src={image} className="secondaryImage" />
                     })}
+                    </div>
+                    <img src={shoppingItem.images[0]} alt="main image" className="mainImage" />
+                   
                 </div>
                 <div className="infoContainer">
                     <h1>{shoppingItem.itemName}</h1>
@@ -57,6 +61,7 @@ const ViewShoppingItem = ({ token }) => {
                     </Rating>
                     <h2>${shoppingItem.price}</h2>
                     <p>{shoppingItem.itemDescription}</p>
+                    <hr/>
                     <input name="number" type="number" value={amountOfItemsToBuy} onChange={(event) => {
                         setAmountOfItemsToBuy(event.target.value)
                     }} />
@@ -82,7 +87,7 @@ const ViewShoppingItem = ({ token }) => {
                     </div>
                 })}
             </div>
-        </> : null}
+        </div> : null}
 
     </>
 }
