@@ -1,4 +1,3 @@
-import "./ShoppingItemsList.css";
 import "@smastrom/react-rating/style.css";
 import { getAllShoppingItems } from "../../../lib/api";
 import { useState, useEffect } from "react";
