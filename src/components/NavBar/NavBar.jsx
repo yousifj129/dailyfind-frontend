@@ -9,13 +9,17 @@ const NavBar = ({ token, handleLogout }) => {
   const [balance, setBalance] = useState(0)
   const [myId, setMyId] = useState()
   const update = async()=>{
+    if(token){
+      setMyId(jwtDecode(token).id)
+
+    }
     if(myId){
+
       const user = await getUserInformation(myId)
       setBalance(user.balance)
     }
   }
   useEffect(()=>{
-    setMyId(jwtDecode(token).id)
     update()
   }, [myId])
   return (
