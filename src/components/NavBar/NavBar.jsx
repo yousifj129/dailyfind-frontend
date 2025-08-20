@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import "./NavBar.css";
+import { jwtDecode } from "jwt-decode";
 const NavBar = ({ token, handleLogout }) => {
+  const myId = jwtDecode(token).id
   return (
     <nav className="navbar">
       <ul className="navlist">
@@ -31,7 +33,7 @@ const NavBar = ({ token, handleLogout }) => {
       </ul>
         <div className="shoppingimg">
             <a href="https://www.google.com/"><img src="https://static.vecteezy.com/system/resources/previews/004/999/463/non_2x/shopping-cart-icon-illustration-free-vector.jpg"  alt="shopping img" /></a>
-            <a href=""><img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"  alt="shopping img" /></a> 
+            <a href={`/user/${myId}`}><img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"  alt="shopping img" /></a> 
             
         </div> 
    </nav>
