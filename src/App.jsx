@@ -9,6 +9,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import SignUp from "./components/SignupForm/SignupForm";
 import ViewShoppingItem from "./components/ViewShoppingItem/ViewShoppingItem";
 import ShoppingItemUpdateForm from "./components/ShoppingItemUpdateForm/ShoppingItemUpdateForm";
+import ProfileView from "./components/ProfileView/ProfileView";
 
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
         />
         <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route
+         path="/user/:id"
+         element={<ProfileView token={token}/>}
+       />
         <Route
           path="update/:id"
           element={<ShoppingItemUpdateForm token={token} />}
