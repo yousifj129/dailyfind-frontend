@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignUp from "./components/SignupForm/SignupForm";
 import ViewShoppingItem from "./components/ViewShoppingItem/ViewShoppingItem";
+import ShoppingItemUpdateForm from "./components/ShoppingItemUpdateForm/ShoppingItemUpdateForm";
 
 
 function App() {
@@ -46,8 +47,12 @@ function App() {
         <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route
+          path="update/:id"
+          element={<ShoppingItemUpdateForm token={token} />}
+        />
+        <Route
           path="/:id"
-          element={<ViewShoppingItem/>}
+          element={<ViewShoppingItem token={token}/>}
         />
         
       </Routes>

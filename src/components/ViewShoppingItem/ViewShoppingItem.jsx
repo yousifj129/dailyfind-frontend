@@ -1,9 +1,11 @@
 import { useParams } from "react-router"
+import { Link } from "react-router"
 import { getAllShoppingItems, getRecommendedShoppingItems, getShoppingItem } from "../../../lib/api"
 import { useEffect, useState } from "react"
 import { ThinStar, Rating } from "@smastrom/react-rating"
 import "./ViewShoppingItem.css"
 import ShoppingItemsListContainer from "../ShoppingItemsList/ShoppingItemsListContainer/ShoppingItemsListContainer"
+import { jwtDecode } from "jwt-decode"
 const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: "#ffb700",
@@ -15,12 +17,18 @@ const ViewShoppingItem = ({ token }) => {
     const [moreLikeItems, setMoreLikeItems] = useState([])
     const [amountOfItemsToBuy, setAmountOfItemsToBuy] = useState(1)
     let rating = 0
+    function getDecodedToken() {
+        if (token) {
+            return jwtDecode(token);
+        }
+        return null;
+    }
     const update = async () => {
         const item = await getShoppingItem(id)
         const recommendedItems = await getRecommendedShoppingItems()
         setShoppingItem(item)
         setMoreLikeItems(recommendedItems)
-        try {            
+        try {
             if (shoppingItem?.reviews?.length > 0) {
                 rating = shoppingItem.reviews.reduce(
                     (accumulator, currentValue) => accumulator + currentValue.rating,
@@ -34,8 +42,6 @@ const ViewShoppingItem = ({ token }) => {
         catch {
 
         }
-
-
     }
     const buyItem = () => {
 
@@ -44,7 +50,7 @@ const ViewShoppingItem = ({ token }) => {
         update()
     }, [])
     return <>
-        {shoppingItem && moreLikeItems? <div className="container">
+        {shoppingItem && moreLikeItems ? <div className="container">
             <div className="itemContainer">
                 <div className="imagesContainer">
                     <div className="secondaryImageContainer">
@@ -58,6 +64,8 @@ const ViewShoppingItem = ({ token }) => {
 
                 </div>
                 <div className="infoContainer">
+                    {getDecodedToken(token)?.id == shoppingItem.owner._id ? <Link to={`/update/${shoppingItem._id}`}>Update Item</Link>
+                        : null}
                     <h1>{shoppingItem.itemName}</h1>
                     <h3>{shoppingItem.owner.username}</h3>
                     <Rating
@@ -95,14 +103,14 @@ const ViewShoppingItem = ({ token }) => {
                     </div>
                 })}
             </div>
-            
+
         </div> : null}
         <div>
             <h1>More Like This</h1>
-                <ShoppingItemsListContainer shoppingItems={moreLikeItems}/>
-            </div>
+            <ShoppingItemsListContainer shoppingItems={moreLikeItems} />
+        </div>
 
-        
+
     </>
 }
 
