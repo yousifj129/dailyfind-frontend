@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ShoppingItemsListContainer from "../ShoppingItemsList/ShoppingItemsListContainer/ShoppingItemsListContainer"
-import { getUserInformation, setUserInformation } from "../../../lib/api"
+import { getUserInformation, setUserInformation, updateShoppingItem } from "../../../lib/api"
 import { jwtDecode } from "jwt-decode"
 
 const ShoppingCart = ({token}) =>{
@@ -22,6 +22,10 @@ const ShoppingCart = ({token}) =>{
             setMessage("Not enough money to buy this")
             return
         }
+        user.ShoppingCart.forEach(shoppingItem => {
+            shoppingItem.quantity -= 1;
+            updateShoppingItem(shoppingItem)
+        });
         user.ShoppingCart = []
         user.balance += amountOfDebt
         await setUserInformation(jwtDecode(token).id, user)
