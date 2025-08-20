@@ -1,6 +1,6 @@
 import { useParams } from "react-router"
 import { Link } from "react-router"
-import { getAllShoppingItems, getRecommendedShoppingItems, getShoppingItem } from "../../../lib/api"
+import { getAllShoppingItems, getRecommendedShoppingItems, getShoppingItem, getUserInformation, setUserInformation } from "../../../lib/api"
 import { useEffect, useState } from "react"
 import { ThinStar, Rating } from "@smastrom/react-rating"
 import "./ViewShoppingItem.css"
@@ -43,8 +43,15 @@ const ViewShoppingItem = ({ token }) => {
 
         }
     }
-    const buyItem = () => {
+    const buyItem = async() => {
+        const currentUser = await getUserInformation(getDecodedToken().id)
 
+        for (let i = 0; i < amountOfItemsToBuy; i++) {
+            currentUser.ShoppingCart.push(id)
+        }
+
+        await setUserInformation(getDecodedToken().id, currentUser)
+        
     }
     useEffect(() => {
         update()
@@ -67,7 +74,7 @@ const ViewShoppingItem = ({ token }) => {
                     {getDecodedToken(token)?.id == shoppingItem.owner._id ? <Link to={`/update/${shoppingItem._id}`}>Update Item</Link>
                         : null}
                     <h1>{shoppingItem.itemName}</h1>
-                    <h3>{shoppingItem.owner.username}</h3>
+                    <Link to={`/user/${shoppingItem.owner._id}`}><h3>{shoppingItem.owner.username}</h3></Link>
                     <Rating
                         style={{ maxWidth: 90, display: "flex" }}
                         value={rating}
@@ -78,7 +85,7 @@ const ViewShoppingItem = ({ token }) => {
                     <h2>${shoppingItem.price}</h2>
                     <p>{shoppingItem.itemDescription}</p>
                     <hr />
-                    <input name="number" type="number" value={amountOfItemsToBuy} onChange={(event) => {
+                    <input min={1} max={1000} name="number" type="number" value={amountOfItemsToBuy} onChange={(event) => {
                         setAmountOfItemsToBuy(event.target.value)
                     }} />
                     <button onClick={buyItem}>Add To Cart</button>

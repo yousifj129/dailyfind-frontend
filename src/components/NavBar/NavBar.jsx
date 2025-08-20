@@ -32,7 +32,7 @@ const NavBar = ({ token, handleLogout }) => {
         ) : null}
       </ul>
         <div className="shoppingimg">
-            <a href="https://www.google.com/"><img src="https://static.vecteezy.com/system/resources/previews/004/999/463/non_2x/shopping-cart-icon-illustration-free-vector.jpg"  alt="shopping img" /></a>
+            <a href="/shoppingcart"><img src="https://static.vecteezy.com/system/resources/previews/004/999/463/non_2x/shopping-cart-icon-illustration-free-vector.jpg"  alt="shopping img" /></a>
             <a href={`/user/${myId}`}><img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"  alt="shopping img" /></a> 
             
         </div> 
