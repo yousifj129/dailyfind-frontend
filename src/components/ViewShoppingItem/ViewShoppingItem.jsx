@@ -1,6 +1,6 @@
 import { useParams } from "react-router"
 import { Link } from "react-router"
-import { getAllShoppingItems, getRecommendedShoppingItems, getShoppingItem, getUserInformation, setUserInformation } from "../../../lib/api"
+import { deleteShoppingItem, getAllShoppingItems, getRecommendedShoppingItems, getShoppingItem, getUserInformation, setUserInformation } from "../../../lib/api"
 import { useEffect, useState } from "react"
 import { ThinStar, Rating } from "@smastrom/react-rating"
 import "./ViewShoppingItem.css"
@@ -73,6 +73,10 @@ const ViewShoppingItem = ({ token }) => {
                 </div>
                 <div className="infoContainer">
                     {getDecodedToken(token)?.id == shoppingItem.owner._id ? <Link to={`/update/${shoppingItem._id}`}>Update Item</Link>
+                        : null}
+                    {getDecodedToken(token)?.id == shoppingItem.owner._id ? <Link onClick={()=>{
+                        deleteShoppingItem(shoppingItem)
+                    }}>Delete Item</Link>
                         : null}
                     <h1>{shoppingItem.itemName}</h1>
                     <Link to={`/user/${shoppingItem.owner._id}`}><h3>{shoppingItem.owner.username}</h3></Link>
