@@ -5,16 +5,19 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { getUserInformation } from "../../../lib/api";
 const NavBar = ({ token, handleLogout }) => {
-  const myId = jwtDecode(token).id
+  
   const [balance, setBalance] = useState(0)
+  const [myId, setMyId] = useState()
   const update = async()=>{
-    const user = await getUserInformation(myId)
-
-    setBalance(user.balance)
+    if(myId){
+      const user = await getUserInformation(myId)
+      setBalance(user.balance)
+    }
   }
   useEffect(()=>{
+    setMyId(jwtDecode(token).id)
     update()
-  }, [])
+  }, [myId])
   return (
     <nav className="navbar">
       <ul className="navlist">

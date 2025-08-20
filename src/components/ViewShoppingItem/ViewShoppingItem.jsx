@@ -6,6 +6,7 @@ import { ThinStar, Rating } from "@smastrom/react-rating"
 import "./ViewShoppingItem.css"
 import ShoppingItemsListContainer from "../ShoppingItemsList/ShoppingItemsListContainer/ShoppingItemsListContainer"
 import { jwtDecode } from "jwt-decode"
+import ReviewForm from "../ReviewForm/ReviewForm"
 const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: "#ffb700",
@@ -16,7 +17,7 @@ const ViewShoppingItem = ({ token }) => {
     const [shoppingItem, setShoppingItem] = useState()
     const [moreLikeItems, setMoreLikeItems] = useState([])
     const [amountOfItemsToBuy, setAmountOfItemsToBuy] = useState(1)
-    let rating = 0
+    const [rating, setRating] = useState(0)
     function getDecodedToken() {
         if (token) {
             return jwtDecode(token);
@@ -25,25 +26,25 @@ const ViewShoppingItem = ({ token }) => {
     }
     const update = async () => {
         const item = await getShoppingItem(id)
-        const recommendedItems = await getRecommendedShoppingItems()
         setShoppingItem(item)
+        const recommendedItems = await getRecommendedShoppingItems()
         setMoreLikeItems(recommendedItems)
         try {
-            if (shoppingItem?.reviews?.length > 0) {
-                rating = shoppingItem.reviews.reduce(
+            if (item.reviews.length > 0) {
+                setRating(item.reviews.reduce(
                     (accumulator, currentValue) => accumulator + currentValue.rating,
                     0
-                ) / shoppingItem.reviews.length;
+                ) / item.reviews.length);
             }
             else {
-                rating = 1
+                setRating(1)
             }
         }
         catch {
 
         }
     }
-    const buyItem = async() => {
+    const buyItem = async () => {
         const currentUser = await getUserInformation(getDecodedToken().id)
 
         for (let i = 0; i < amountOfItemsToBuy; i++) {
@@ -51,13 +52,13 @@ const ViewShoppingItem = ({ token }) => {
         }
 
         await setUserInformation(getDecodedToken().id, currentUser)
-        
+
     }
     useEffect(() => {
         update()
     }, [])
     return <>
-        {shoppingItem && moreLikeItems ? <div className="container">
+        {shoppingItem && moreLikeItems ? <> <div className="container">
             <div className="itemContainer">
                 <div className="imagesContainer">
                     <div className="secondaryImageContainer">
@@ -87,14 +88,20 @@ const ViewShoppingItem = ({ token }) => {
                     <hr />
                     <input min={1} max={1000} name="number" type="number" value={amountOfItemsToBuy} onChange={(event) => {
                         setAmountOfItemsToBuy(event.target.value)
+                        console.log(rating )
                     }} />
                     <button onClick={buyItem}>Add To Cart</button>
                 </div>
 
             </div>
+
+
+        </div>
             <div className="reviewsContainer">
+                {token ? <ReviewForm token={token} id={id} shoppingItem={shoppingItem}></ReviewForm> : null}
+                {/* Zaid was here ;) */}
                 {shoppingItem.reviews.map((review) => {
-                    <div key={review._id}>
+                    return <div key={review._id}>
                         <h3>{review.reviewer.username}</h3>
                         <Rating
                             style={{ maxWidth: 90, display: "flex" }}
@@ -107,11 +114,11 @@ const ViewShoppingItem = ({ token }) => {
                             </span>
                         </Rating>
                         <p>{review.message}</p>
+                        <hr />
                     </div>
                 })}
-            </div>
+            </div> </> : null}
 
-        </div> : null}
         <div>
             <h1>More Like This</h1>
             <ShoppingItemsListContainer shoppingItems={moreLikeItems} />
