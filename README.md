@@ -1,12 +1,27 @@
-# React + Vite
+# dailyfind-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+DailyFind is an e-commerce application that allows users to buy and sell shopping items.
+This is the front-end side of this application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* HTML5
+* CSS3
+* Git
+* react.js
+* Node.js
+
+## Getting Started
+
+Fork this repository and follow these steps to run the site:
+
+* install the packages: npm install
+* add the .env file and write this with your details:
+
+```
+VITE_BACK_END_SERVER_URL=Backend URL
+```
+* then run it ```npm run dev```
